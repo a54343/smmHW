@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "mybatis-3-mapper.dtd">
+<mapper namespace="com.hwrky.shop.dao.Adminmapper">
+    <resultMap id="AdminMap" type="admin">
+        <id property="admin_id" column="admin_id"/>
+        <result property="admin_name" column="admin_name"/>
+        <result property="admin_pwd" column="admin_pwd"/>
+    
+    </resultMap>
+    
+       <select id="SelectAdmin" resultType="Integer" parameterType="string">
+        SELECT COUNT(admin_id) FROM admin
+        <if test="admin!=null">
+            <where>
+                <if test="admin.admin_name!=null">
+                     admin_name=#{admin.admin_name}
+                </if>
+                <if test="admin.admin_pwd!=null">
+                    and admin_pwd = #{admin.admin_pwd}
+                </if>
+            </where>
+        </if>
+    </select>
+  </mapper>
